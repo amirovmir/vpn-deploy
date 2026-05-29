@@ -2,7 +2,6 @@
 protocols/*/config.json
 protocols/*/*.generated.*
 client-*.json
-keys-*.json
 
 # PowerShell
 *.ps1xml
