@@ -69,9 +69,9 @@ function Build-ClientConfig {
         routing = [ordered]@{
             domainStrategy = "IPIfNonMatch"
             rules = @(
-                [ordered]@{ type = "field"; outboundTag = "direct"; ip      = @("geoip:private") }
-                [ordered]@{ type = "field"; outboundTag = "direct"; domain  = @("geosite:cn")    }
-                [ordered]@{ type = "field"; outboundTag = "direct"; ip      = @("geoip:cn")      }
+                [ordered]@{ type = "field"; outboundTag = "direct"; ip     = @("geoip:private") }
+                [ordered]@{ type = "field"; outboundTag = "direct"; domain = @("geosite:ru")    }
+                [ordered]@{ type = "field"; outboundTag = "direct"; ip     = @("geoip:ru")      }
             )
         }
     } | ConvertTo-Json -Depth 20
