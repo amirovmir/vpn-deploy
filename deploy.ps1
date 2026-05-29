@@ -207,6 +207,11 @@ OK "UUID:       $uuid"
 OK "Public key: $publicKey"
 OK "Short ID:   $shortId"
 
+# Save keys locally for offline URI/config regeneration
+$keysFile = Join-Path $ScriptDir "keys-$IP.json"
+[ordered]@{ uuid = $uuid; publicKey = $publicKey; shortId = $shortId; ip = $IP } `
+    | ConvertTo-Json | Set-Content $keysFile -Encoding UTF8
+
 # ── [7/8] Render config and start container ────────────────────────────────────
 
 Step "7/8" "Write config and start container"
