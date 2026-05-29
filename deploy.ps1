@@ -227,6 +227,9 @@ $b64 = [Convert]::ToBase64String([Text.Encoding]::UTF8.GetBytes($configJson))
 SSH "echo '$b64' | base64 -d > /opt/vpn/xray/config.json" | Out-Null
 INFO "Config written to /opt/vpn/xray/config.json"
 
+# Kill any stray xray processes that may occupy port 443 outside Docker
+SSH "pkill -x xray 2>/dev/null; sleep 1; true" | Out-Null
+
 $composeOut = SSH "cd /opt/vpn && docker compose up -d --force-recreate 2>&1"
 $composeOut -split "`n" | Where-Object { $_ -match '\S' } | ForEach-Object { INFO $_ }
 
