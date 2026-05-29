@@ -143,7 +143,13 @@ if (-not $publicKey) {
 
 $ProtocolDir = Join-Path $ScriptDir "protocols\$Protocol"
 . "$ProtocolDir\build-uri.ps1"
-$uri = Build-VlessUri -Uuid $uuid -PublicKey $publicKey -ServerIP $IP -ShortId $shortId
+. "$ProtocolDir\build-client-config.ps1"
+
+$uri        = Build-VlessUri -Uuid $uuid -PublicKey $publicKey -ServerIP $IP -ShortId $shortId
+$clientJson = Build-ClientConfig -Uuid $uuid -PublicKey $publicKey -ServerIP $IP -ShortId $shortId
+
+$configFile = Join-Path $ScriptDir "client-$IP.json"
+$clientJson | Set-Content $configFile -Encoding UTF8
 
 Write-Host ""
 Write-Host "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" -ForegroundColor Cyan
@@ -154,6 +160,9 @@ Write-Host "  SNI      : ads.x5.ru" -ForegroundColor White
 Write-Host ""
 Write-Host "  VLESS URI:" -ForegroundColor Yellow
 Write-Host "  $uri" -ForegroundColor White
+Write-Host ""
+Write-Host "  Client JSON: $configFile" -ForegroundColor Yellow
+Write-Host "  (v2rayN: Servers -> Import custom config from file)" -ForegroundColor Gray
 Write-Host ""
 Write-Host "  Import into: v2rayN (Win) · Shadowrocket (iOS)" -ForegroundColor Gray
 Write-Host "               Hiddify · NekoBox (Android)" -ForegroundColor Gray

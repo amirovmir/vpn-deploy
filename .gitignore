@@ -1,6 +1,7 @@
 # Generated configs with real keys (never commit)
 protocols/*/config.json
 protocols/*/*.generated.*
+client-*.json
 
 # PowerShell
 *.ps1xml
