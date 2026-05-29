@@ -280,4 +280,4 @@ Write-Host "  Import into: v2rayN (Win) · Shadowrocket (iOS)" -ForegroundColor 
 Write-Host "               Hiddify · NekoBox (Android)" -ForegroundColor Gray
 Write-Host "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" -ForegroundColor Cyan
 Write-Host ""
-Read-Host "  Press Enter to close"
+try { Read-Host "  Press Enter to close" } catch { }
