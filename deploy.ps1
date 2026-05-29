@@ -114,8 +114,11 @@ $PLINK = "C:\Program Files\PuTTY\plink.exe"
 $PSCP  = "C:\Program Files\PuTTY\pscp.exe"
 
 function SSH([string]$Cmd) {
+    $old = $ErrorActionPreference
+    $ErrorActionPreference = "SilentlyContinue"
     $result = & $PLINK -ssh "${User}@${IP}" -P $Port -pw $Password -batch -no-antispoof $Cmd 2>&1
-    return $result -join "`n"
+    $ErrorActionPreference = $old
+    return ($result | ForEach-Object { "$_" }) -join "`n"
 }
 
 function SCP([string]$Local, [string]$Remote) {

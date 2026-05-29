@@ -1,6 +1,6 @@
 services:
   hysteria2:
-    image: tobyxdd/hysteria:app-latest
+    image: tobyxdd/hysteria:latest
     container_name: hysteria2-vpn
     restart: unless-stopped
     network_mode: host
