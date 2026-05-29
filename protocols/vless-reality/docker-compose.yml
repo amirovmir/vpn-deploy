@@ -1,0 +1,10 @@
+services:
+  xray:
+    image: teddysun/xray:latest
+    container_name: xray-vpn
+    restart: unless-stopped
+    network_mode: host
+    volumes:
+      - /opt/vpn/xray/config.json:/etc/xray/config.json:ro
+    cap_add:
+      - NET_ADMIN

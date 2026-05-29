@@ -1,0 +1,10 @@
+# Generated configs with real keys (never commit)
+protocols/*/config.json
+protocols/*/*.generated.*
+
+# PowerShell
+*.ps1xml
+
+# OS
+Thumbs.db
+.DS_Store
