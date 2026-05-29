@@ -1,15 +1,7 @@
 function Build-ClientConfig {
     param(
-        [Parameter(Mandatory)][string]$Uuid,
-        [Parameter(Mandatory)][string]$PublicKey,
-        [Parameter(Mandatory)][string]$ServerIP,
-        [Parameter(Mandatory)][string]$ShortId,
-        [string]$Sni         = "ads.x5.ru",
-        [int]   $Port        = 443,
-        [string]$Flow        = "xtls-rprx-vision",
-        [string]$Fingerprint = "chrome",
-        [int]   $SocksPort   = 10808,
-        [int]   $HttpPort    = 10809
+        [Parameter(Mandatory)][object]$Keys,
+        [Parameter(Mandatory)][string]$ServerIP
     )
 
     return [ordered]@{
@@ -19,14 +11,14 @@ function Build-ClientConfig {
             [ordered]@{
                 tag      = "socks"
                 listen   = "127.0.0.1"
-                port     = $SocksPort
+                port     = 10808
                 protocol = "socks"
                 settings = [ordered]@{ auth = "noauth"; udp = $true }
             }
             [ordered]@{
                 tag      = "http"
                 listen   = "127.0.0.1"
-                port     = $HttpPort
+                port     = 10809
                 protocol = "http"
                 settings = [ordered]@{ allowTransparent = $false }
             }
@@ -40,12 +32,12 @@ function Build-ClientConfig {
                     vnext = @(
                         [ordered]@{
                             address = $ServerIP
-                            port    = $Port
+                            port    = 443
                             users   = @(
                                 [ordered]@{
-                                    id         = $Uuid
+                                    id         = $Keys.uuid
                                     encryption = "none"
-                                    flow       = $Flow
+                                    flow       = "xtls-rprx-vision"
                                 }
                             )
                         }
@@ -55,10 +47,10 @@ function Build-ClientConfig {
                     network  = "tcp"
                     security = "reality"
                     realitySettings = [ordered]@{
-                        serverName  = $Sni
-                        fingerprint = $Fingerprint
-                        publicKey   = $PublicKey
-                        shortId     = $ShortId
+                        serverName  = "ads.x5.ru"
+                        fingerprint = "chrome"
+                        publicKey   = $Keys.publicKey
+                        shortId     = $Keys.shortId
                     }
                 }
             }

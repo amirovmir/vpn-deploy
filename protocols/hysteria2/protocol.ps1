@@ -1,0 +1,6 @@
+$ContainerName  = "hysteria2-vpn"
+$ConfigDir      = "/etc/hysteria"
+$ConfigRemote   = "/etc/hysteria/config.yaml"
+$ConfigTemplate = "config.template.yaml"
+$StrayProcess   = ""
+$ClientExt      = "yaml"

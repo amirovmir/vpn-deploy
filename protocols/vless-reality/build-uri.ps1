@@ -1,17 +1,9 @@
-function Build-VlessUri {
+function Build-Uri {
     param(
-        [Parameter(Mandatory)][string]$Uuid,
-        [Parameter(Mandatory)][string]$PublicKey,
-        [Parameter(Mandatory)][string]$ServerIP,
-        [Parameter(Mandatory)][string]$ShortId,
-        [string]$Sni    = "ads.x5.ru",
-        [int]   $Port   = 443,
-        [string]$Flow   = "xtls-rprx-vision",
-        [string]$Remark = "vpn-deploy"
+        [Parameter(Mandatory)][object]$Keys,
+        [Parameter(Mandatory)][string]$ServerIP
     )
-
-    $params = "security=reality&sni=$Sni&fp=chrome&pbk=$PublicKey&sid=$ShortId&flow=$Flow&type=tcp"
-    $remarkEncoded = [Uri]::EscapeDataString($Remark)
-
-    return "vless://${Uuid}@${ServerIP}:${Port}?${params}#${remarkEncoded}"
+    $params = "security=reality&sni=ads.x5.ru&fp=chrome&pbk=$($Keys.publicKey)&sid=$($Keys.shortId)&flow=xtls-rprx-vision&type=tcp"
+    $remark = [Uri]::EscapeDataString("vpn-deploy")
+    return "vless://$($Keys.uuid)@${ServerIP}:443?${params}#${remark}"
 }

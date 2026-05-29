@@ -1,0 +1,9 @@
+services:
+  hysteria2:
+    image: tobyxdd/hysteria:app-latest
+    container_name: hysteria2-vpn
+    restart: unless-stopped
+    network_mode: host
+    volumes:
+      - /etc/hysteria:/etc/hysteria:ro
+    command: server

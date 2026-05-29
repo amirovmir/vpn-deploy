@@ -1,0 +1,6 @@
+$ContainerName  = "xray-vpn"
+$ConfigDir      = "/opt/vpn/xray"
+$ConfigRemote   = "/opt/vpn/xray/config.json"
+$ConfigTemplate = "config.template.json"
+$StrayProcess   = "xray"
+$ClientExt      = "json"
